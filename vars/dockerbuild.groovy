@@ -1,4 +1,6 @@
 def call(String hubuser, String repo, String repotag, String hubcred) {
+            def image= "${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"
+            echo "${image}"
 withCredentials([usernamePassword(
             credentialsId: "${hubcred}",
             usernameVariable: "Username",
@@ -10,7 +12,6 @@ withCredentials([usernamePassword(
     sh "docker image rm ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"   
     
 }
-    def image= "${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"
-            echo ${image}
+    
     //sh 'sed -i s/"IMAGEID"/"${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"/g  app-deployment.yaml'
 }
