@@ -1,4 +1,8 @@
-def call(String scannerproperties) {
-   //def scannerHome = tool '${scanner}';
-      sh "/opt/sonar-scanner/bin/sonar-scanner -Dproject.settings=${scannerproperties}"    
+def call(String server, String scanner,String sonarproperties) {
+  //def scannerHome = tool 'Mysonarscanner'
+  
+  withSonarQubeEnv("${server}") {
+
+     sh "${tool("${scanner}")}/bin/sonar-scanner -Dproject.settings=${sonarproperties}"
+}
 }
