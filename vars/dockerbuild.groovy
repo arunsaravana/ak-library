@@ -1,6 +1,6 @@
-def call(String hubuser, String repo, String repotag, String awscred) {
+def call(String hubuser, String repo, String repotag, String hubcred) {
 withCredentials([usernamePassword(
-            credentialsId: ${awscred},
+            credentialsId: ${hubcred},
             usernameVariable: "Username",
             passwordVariable: "Password"
         )]) {
