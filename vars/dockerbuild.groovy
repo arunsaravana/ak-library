@@ -8,7 +8,8 @@ withCredentials([usernamePassword(
     sh "docker image build -t ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER} ."
     sh "docker image push ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"
     sh "docker image rm ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"   
+    
+}
     def image= ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}
     sh 'sed -i s/"IMAGEID"/"$image"/g app-deployment.yaml'
-}
 }
