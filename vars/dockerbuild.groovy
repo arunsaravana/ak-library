@@ -1,5 +1,5 @@
 def call(String hubuser, String repo, String repotag, String hubcred) {
-           
+           def imagebuild= "${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"
 withCredentials([usernamePassword(
             credentialsId: "${hubcred}",
             usernameVariable: "Username",
@@ -10,11 +10,8 @@ withCredentials([usernamePassword(
     sh "docker image build -t ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER} ."
     sh "docker image push ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"
     sh "docker image rm ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"   
-       
-    
-}   
-            def imageid= "${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"
-            echo "${imageid}" 
-            sh 'sed -i s/"IMAGEID"/"$imageid"/g  app-deployment.yaml'          
+    echo "${imagebuild}" 
+    sh 'sed -i s/"IMAGEID"/"$imagebuild"/g  app-deployment.yaml' 
+    }                    
     //sh 'sed -i s/"IMAGEID"/"${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"/g  app-deployment.yaml'
 }
