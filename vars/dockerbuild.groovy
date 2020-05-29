@@ -10,7 +10,7 @@ withCredentials([usernamePassword(
     sh "docker image rm ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"   
     
 }
-    def image= ${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}
+    def image= "${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"
             echo ${image}
     //sh 'sed -i s/"IMAGEID"/"${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"/g  app-deployment.yaml'
 }
