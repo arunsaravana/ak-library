@@ -15,6 +15,6 @@ withCredentials([usernamePassword(
 }   
             def image= "${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"
             echo "${image}" 
-            sh 'sed -i s/"IMAGEID"/"${image}"/g  app-deployment.yaml'          
+            sh 'sed -i s/"IMAGEID"/"$image"/g  app-deployment.yaml'          
     //sh 'sed -i s/"IMAGEID"/"${hubuser}/${repo}:${repotag}-v${env.BUILD_NUMBER}"/g  app-deployment.yaml'
 }
